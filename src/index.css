@@ -1,0 +1,465 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Papers, Please Inspired Design System - Classified Dossier */
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Special+Elite&display=swap');
+
+@layer base {
+  :root {
+    /* Core paper and document colors */
+    --background: 40 30% 92%;
+    --foreground: 200 10% 15%;
+    
+    /* Aged manila folder */
+    --card: 38 35% 85%;
+    --card-foreground: 200 10% 15%;
+    
+    --popover: 40 30% 90%;
+    --popover-foreground: 200 10% 15%;
+    
+    /* Military olive green */
+    --primary: 80 35% 30%;
+    --primary-foreground: 40 30% 95%;
+    
+    /* Steel gray */
+    --secondary: 200 10% 40%;
+    --secondary-foreground: 40 30% 95%;
+    
+    /* Muted document gray */
+    --muted: 40 15% 80%;
+    --muted-foreground: 200 10% 35%;
+    
+    /* Olive accent */
+    --accent: 75 30% 35%;
+    --accent-foreground: 40 30% 95%;
+    
+    /* Warning/stamp red */
+    --destructive: 0 60% 35%;
+    --destructive-foreground: 40 30% 95%;
+    
+    /* Document borders */
+    --border: 35 25% 70%;
+    --input: 35 25% 75%;
+    --ring: 80 35% 30%;
+    
+    --radius: 0;
+    
+    /* Custom dossier colors */
+    --paper: 42 40% 88%;
+    --paper-aged: 38 35% 82%;
+    --ink: 200 15% 20%;
+    --stamp-red: 0 55% 40%;
+    --stamp-green: 120 40% 30%;
+    --stamp-blue: 210 45% 35%;
+    --classified: 0 70% 45%;
+    --redacted: 0 0% 10%;
+    --metal-clip: 40 10% 55%;
+    --folder-tab: 35 40% 75%;
+    
+    /* Sidebar - keeping for compatibility */
+    --sidebar-background: 38 35% 85%;
+    --sidebar-foreground: 200 10% 20%;
+    --sidebar-primary: 80 35% 30%;
+    --sidebar-primary-foreground: 40 30% 95%;
+    --sidebar-accent: 75 30% 35%;
+    --sidebar-accent-foreground: 40 30% 95%;
+    --sidebar-border: 35 25% 65%;
+    --sidebar-ring: 80 35% 30%;
+  }
+
+  .dark {
+    --background: 200 15% 12%;
+    --foreground: 40 25% 85%;
+    
+    --card: 200 12% 15%;
+    --card-foreground: 40 25% 85%;
+    
+    --popover: 200 15% 14%;
+    --popover-foreground: 40 25% 85%;
+    
+    --primary: 75 35% 45%;
+    --primary-foreground: 200 15% 10%;
+    
+    --secondary: 200 10% 25%;
+    --secondary-foreground: 40 25% 85%;
+    
+    --muted: 200 10% 20%;
+    --muted-foreground: 40 15% 60%;
+    
+    --accent: 75 30% 40%;
+    --accent-foreground: 200 15% 10%;
+    
+    --destructive: 0 50% 45%;
+    --destructive-foreground: 40 25% 90%;
+    
+    --border: 200 10% 25%;
+    --input: 200 10% 25%;
+    --ring: 75 35% 45%;
+    
+    --paper: 200 12% 18%;
+    --paper-aged: 200 10% 15%;
+    --ink: 40 20% 80%;
+    --stamp-red: 0 50% 50%;
+    --stamp-green: 120 35% 40%;
+    --stamp-blue: 210 40% 45%;
+    --classified: 0 60% 50%;
+    --redacted: 0 0% 85%;
+    --metal-clip: 40 8% 45%;
+    --folder-tab: 200 10% 22%;
+    
+    --sidebar-background: 200 12% 15%;
+    --sidebar-foreground: 40 20% 80%;
+    --sidebar-primary: 75 35% 45%;
+    --sidebar-primary-foreground: 200 15% 10%;
+    --sidebar-accent: 75 30% 40%;
+    --sidebar-accent-foreground: 200 15% 10%;
+    --sidebar-border: 200 10% 25%;
+    --sidebar-ring: 75 35% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-mono;
+    font-family: 'VT323', monospace;
+    image-rendering: pixelated;
+  }
+
+  /* Pixel-perfect rendering */
+  img, canvas {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+}
+
+@layer components {
+  /* Paper texture overlay */
+  .paper-texture {
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        hsl(var(--paper-aged) / 0.3) 2px,
+        hsl(var(--paper-aged) / 0.3) 4px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        hsl(var(--paper-aged) / 0.2) 2px,
+        hsl(var(--paper-aged) / 0.2) 4px
+      );
+  }
+
+  /* Aged paper effect */
+  .aged-paper {
+    @apply bg-paper relative;
+    box-shadow: 
+      inset 0 0 50px hsl(var(--paper-aged) / 0.5),
+      2px 2px 0 hsl(var(--border)),
+      4px 4px 0 hsl(var(--border) / 0.5);
+  }
+
+  /* Folder tab style */
+  .folder-tab {
+    @apply bg-folder-tab px-4 py-2 border-2 border-border border-b-0;
+    clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+  }
+
+  /* Stamp base styles */
+  .stamp {
+    @apply inline-block px-3 py-1 border-4 font-bold uppercase tracking-wider;
+    transform: rotate(-5deg);
+    font-family: 'Special Elite', 'VT323', monospace;
+  }
+
+  .stamp-red {
+    @apply stamp border-stamp-red text-stamp-red;
+  }
+
+  .stamp-green {
+    @apply stamp border-stamp-green text-stamp-green;
+  }
+
+  .stamp-blue {
+    @apply stamp border-stamp-blue text-stamp-blue;
+  }
+
+  /* Redacted text effect */
+  .redacted {
+    @apply bg-redacted text-redacted px-1 select-none;
+  }
+
+  .redacted-hover {
+    @apply bg-redacted text-redacted px-1 transition-none cursor-pointer;
+  }
+  
+  .redacted-hover:hover {
+    @apply bg-transparent text-foreground;
+  }
+
+  /* Metal paper clip */
+  .paper-clip {
+    @apply absolute w-8 h-16 rounded-full border-4 border-metal-clip;
+    transform: rotate(-30deg);
+  }
+
+  /* Typewriter text effect */
+  .typewriter {
+    font-family: 'Special Elite', 'VT323', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  /* Classification header */
+  .classified-header {
+    @apply text-center py-2 border-y-4 border-classified text-classified font-bold tracking-widest text-xl;
+  }
+
+  /* Document field */
+  .doc-field {
+    @apply border-b-2 border-dashed border-border pb-1 mb-3;
+  }
+
+  .doc-label {
+    @apply text-muted-foreground uppercase text-sm tracking-wider mb-1;
+  }
+
+  .doc-value {
+    @apply text-foreground text-lg;
+  }
+
+  /* Pixel button */
+  .pixel-btn {
+    @apply relative px-6 py-3 bg-primary text-primary-foreground font-bold uppercase tracking-wider;
+    box-shadow: 
+      4px 4px 0 hsl(var(--border)),
+      inset -2px -2px 0 hsl(var(--primary) / 0.7),
+      inset 2px 2px 0 hsl(var(--primary-foreground) / 0.2);
+    transition: none;
+  }
+
+  .pixel-btn:hover {
+    box-shadow: 
+      2px 2px 0 hsl(var(--border)),
+      inset -2px -2px 0 hsl(var(--primary) / 0.7),
+      inset 2px 2px 0 hsl(var(--primary-foreground) / 0.2);
+    transform: translate(2px, 2px);
+  }
+
+  .pixel-btn:active {
+    box-shadow: 
+      0 0 0 hsl(var(--border)),
+      inset -2px -2px 0 hsl(var(--primary) / 0.7),
+      inset 2px 2px 0 hsl(var(--primary-foreground) / 0.2);
+    transform: translate(4px, 4px);
+  }
+
+  /* Folder cover */
+  .folder-cover {
+    @apply bg-folder-tab border-4 border-border p-8 relative;
+    box-shadow: 
+      8px 8px 0 hsl(var(--border)),
+      inset 0 0 100px hsl(var(--paper-aged) / 0.3);
+  }
+
+  /* Scanline effect */
+  .scanlines::after {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsl(var(--foreground) / 0.03) 2px,
+      hsl(var(--foreground) / 0.03) 4px
+    );
+  }
+
+  /* Navigation tabs */
+  .nav-tab {
+    @apply px-4 py-2 bg-folder-tab border-2 border-border border-b-0 -mb-[2px] relative;
+    transition: none;
+  }
+
+  .nav-tab:hover {
+    @apply bg-paper;
+  }
+
+  .nav-tab.active {
+    @apply bg-paper z-10;
+  }
+
+  /* Tech badge */
+  .tech-badge {
+    @apply inline-block px-2 py-1 bg-muted text-muted-foreground text-sm border border-border mr-2 mb-2;
+  }
+
+  /* Status indicators */
+  .status-active {
+    @apply text-stamp-green font-bold;
+  }
+
+  .status-legacy {
+    @apply text-muted-foreground;
+  }
+
+  .status-experimental {
+    @apply text-stamp-blue font-bold;
+  }
+
+  /* Proficiency bar */
+  .proficiency-bar {
+    @apply h-4 bg-muted border border-border relative overflow-hidden;
+  }
+
+  .proficiency-fill {
+    @apply h-full bg-primary;
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 4px,
+      hsl(var(--primary-foreground) / 0.2) 4px,
+      hsl(var(--primary-foreground) / 0.2) 8px
+    );
+  }
+}
+
+@layer utilities {
+  /* Pixel-perfect animations */
+  @keyframes folder-open {
+    0% {
+      transform: perspective(500px) rotateX(0deg);
+      transform-origin: bottom;
+    }
+    100% {
+      transform: perspective(500px) rotateX(-30deg);
+      transform-origin: bottom;
+    }
+  }
+
+  @keyframes stamp-appear {
+    0% {
+      opacity: 0;
+      transform: rotate(-5deg) scale(1.5);
+    }
+    50% {
+      opacity: 1;
+      transform: rotate(-5deg) scale(1.1);
+    }
+    100% {
+      opacity: 1;
+      transform: rotate(-5deg) scale(1);
+    }
+  }
+
+  @keyframes blink-cursor {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes glitch {
+    0%, 90%, 100% {
+      transform: translate(0);
+    }
+    92% {
+      transform: translate(-2px, 1px);
+    }
+    94% {
+      transform: translate(2px, -1px);
+    }
+    96% {
+      transform: translate(-1px, 2px);
+    }
+    98% {
+      transform: translate(1px, -2px);
+    }
+  }
+
+  .animate-folder-open {
+    animation: folder-open 0.3s ease-out forwards;
+  }
+
+  .animate-stamp {
+    animation: stamp-appear 0.15s ease-out forwards;
+  }
+
+  .animate-blink {
+    animation: blink-cursor 1s step-end infinite;
+  }
+
+  .animate-glitch {
+    animation: glitch 2s infinite;
+  }
+
+  /* Utility colors */
+  .text-ink {
+    color: hsl(var(--ink));
+  }
+
+  .bg-paper {
+    background-color: hsl(var(--paper));
+  }
+
+  .bg-paper-aged {
+    background-color: hsl(var(--paper-aged));
+  }
+
+  .text-classified {
+    color: hsl(var(--classified));
+  }
+
+  .border-classified {
+    border-color: hsl(var(--classified));
+  }
+
+  .text-stamp-red {
+    color: hsl(var(--stamp-red));
+  }
+
+  .border-stamp-red {
+    border-color: hsl(var(--stamp-red));
+  }
+
+  .text-stamp-green {
+    color: hsl(var(--stamp-green));
+  }
+
+  .border-stamp-green {
+    border-color: hsl(var(--stamp-green));
+  }
+
+  .text-stamp-blue {
+    color: hsl(var(--stamp-blue));
+  }
+
+  .border-stamp-blue {
+    border-color: hsl(var(--stamp-blue));
+  }
+
+  .bg-redacted {
+    background-color: hsl(var(--redacted));
+  }
+
+  .text-redacted {
+    color: hsl(var(--redacted));
+  }
+
+  .bg-folder-tab {
+    background-color: hsl(var(--folder-tab));
+  }
+
+  .border-metal-clip {
+    border-color: hsl(var(--metal-clip));
+  }
+}
